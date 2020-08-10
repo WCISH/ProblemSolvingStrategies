@@ -54,6 +54,18 @@ int majority2(const vector<int>& A) {
 vector<double> movingAverage1(const vector<double>& A, int M) {
     vector<double> ret;
     //M(N-M+1) 번 수행
+    /*
+    0. n을 정해줬으므로 길이 12의 몸무게 리스트을 만든다.
+    1. 이중 for 문을 통해서 m달 동안의 이동 평균을 구한다.
+    2. 첫 번째 for문에서는 [m-1, n) 까지 인덱싱 한다.
+    2-1. m = 3이고 n = 12인 경우에 [2, 11)까지 인덱싱 해서 두 번째 for문의 기준이 되도록 한다.
+    3. 두 번째 for문에서는 [0, m) 까지 인덱싱 한다. m달 간의 이동평균을 구해야 하기 때문이다.
+    4. m달간의 값을 더해서 저장하는 변수에 몸무게 리스트의 [i-j] 번 째 값을 더해준다.
+    5. 합을 m으로 나눠서 이동평균을 출력하고 첫 번째 반복문이 다시 시작될 때 m달 간 값을 더하는 변수를 0으로 초기화 시킨다.
+
+
+    "시간 복잡도가 O(N^2)으로 선형 시간 알고리즘이라고 할 수 없다."
+    */
     int N = A.size();
 
     for (int i = M - 1; i < N; ++i) {
@@ -63,6 +75,30 @@ vector<double> movingAverage1(const vector<double>& A, int M) {
             partialSum += A[i - j];
 
         ret.push_back(partialSum / M);
+    }
+
+    return ret;
+}
+
+
+vector<double> movingAverage1(const vector<double>& A, int M) {
+    vector<double> ret;
+    int N = A.size();
+    double partialSum = 0;
+
+    for (int i = 0; i < M - 1; ++i)
+        partialSum += A[i];
+
+    //0123번째 이동평균 -> 0 번째 삭제 -> 4번째 더하기 -> 1234 번째 이동평균 -> 1 번째 삭제....
+    //해주면 하나의 for문으로만 이동 평균을 구할 수 있음.
+    //M-1+(N-M+1)
+    //N이 두 배 커지면 실행도 두 배 오래 걸림
+    //입력 크기에 대비해 걸리는 시간을 그려 보면 직선
+    //선형 시간(linear time) 알고리즘
+    for (int i = M - 1; i < N; ++i) {
+        partialSum += A[i];
+        ret.push_back(partialSum / M);
+        partialSum -= A[i - M + 1];
     }
 
     return ret;
