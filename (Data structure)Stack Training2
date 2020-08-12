@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+int main(void) {
+    int how_many;
+    stack<char> stack_;
+    cin >> how_many;
+    cin.ignore();
+    string str;
+
+    while (how_many--) {
+        getline(cin, str);
+        str += '\n';
+
+        for (int x = 0; x < str.length(); x++) {
+            if (str[x] == ' ' || str[x] == '\n') {
+                while (!stack_.empty()) {
+                    printf("%c", stack_.top());
+                    stack_.pop();
+                }
+                printf(" ");
+            }
+            else { stack_.push(str[x]); }
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
