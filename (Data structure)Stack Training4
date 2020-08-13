@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+int main() {
+    stack<int> stack_;
+    int how_many;
+    int temp;
+    int count = 1;
+    string s;
+    cin >> how_many;
+    cin.ignore();
+
+    while (how_many--) {
+        cin >> temp;
+        cin.ignore();
+
+        if (count <= temp)
+        {
+            for (int x = count; x <= temp; x++) {
+                stack_.push(count++);
+                s += '+';
+            }
+            stack_.pop();
+            s += '-';
+        }
+        else
+        {
+            while (true) {
+
+                if (!stack_.empty()) {
+
+                    if (stack_.top() == temp)
+                    {
+                        stack_.pop();
+                        s += '-';
+                        break;
+                    }
+
+                    stack_.pop();
+                    s += '-';
+                }
+                else {
+                    printf("NO\n");
+                    return 0;
+                }
+            }
+        }
+    }
+    for (auto a : s)
+        printf("%c\n", a);
+    return 0;
+}
