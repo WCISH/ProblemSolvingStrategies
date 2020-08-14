@@ -1,0 +1,39 @@
+[Josephus permutation]
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+
+
+int main() {
+	queue<int> st;
+	int a, b;
+	cin >> a;
+	cin >> b;
+
+	for (int x = 1; x <= a; x++)
+		st.push(x);
+
+	int x = 1;
+	printf("<");
+	while (true) {
+		if (x == b) {
+			printf("%d", st.front());
+			st.pop();
+			x = 1;
+			if (st.empty())
+				break;
+			printf(", ");
+		}
+		else {
+			++x;
+			st.push(st.front());
+			st.pop();
+		}
+
+		if (st.empty())
+			break;
+	}
+	printf(">");
+	return 0;
+}
