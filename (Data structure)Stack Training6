@@ -1,0 +1,83 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+struct queue
+{
+	int front_ = 0;
+	int end_ = 0;
+	int memory[10000];
+
+	void push(int x) {
+		memory[end_]=x;
+		end_++;
+	}
+	void pop() {
+		if (end_ - front_ <= 0)
+			printf("-1\n");
+		else
+		{
+			printf("%d\n", memory[front_++]);
+		}
+	}
+	void size() {
+		printf("%d\n", end_ - front_);
+	}
+	void empty() {
+		if (end_ - front_ <= 0)
+			printf("1\n");
+		else
+			printf("0\n");
+	}
+
+	void back() {
+		if (end_ - front_ <= 0)
+			printf("-1\n");
+		else
+			printf("%d\n", memory[end_-1]);
+	}
+
+
+	void front() {
+		if (end_ - front_ <= 0)
+			printf("-1\n");
+		else
+			printf("%d\n", memory[front_]);
+	}
+
+};
+
+int main() {
+	queue _queue_;
+	int how_many;
+
+	cin >> how_many;
+
+	while (how_many--) {
+		string s;
+		cin >> s;
+		if (s == "push") {
+			int ch;
+			cin >> ch;
+			_queue_.push(ch);
+		}
+		else if (s == "pop") {
+			_queue_.pop();
+		}
+		else if (s == "size") {
+			_queue_.size();
+		}
+		else if (s == "empty") {
+			_queue_.empty();
+		}
+		else if (s == "front") {
+			_queue_.front();
+		}
+		else if (s == "back") {
+			_queue_.back();
+		}
+
+	}
+	return 0;
+}
