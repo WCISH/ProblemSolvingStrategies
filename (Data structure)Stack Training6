@@ -1,0 +1,46 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+void show_stack(stack<char>& a) {
+	while (!a.empty()) {
+		printf("%c", a.top());
+		a.pop();
+	}
+}
+
+int main() {
+	stack<char> _stack_;
+	bool check = false;
+	string s;
+	getline(cin, s);
+	s += '\n';
+
+
+	for (char one_char : s) {
+		if (one_char == '<') {
+			show_stack(_stack_);
+			printf("%c", one_char);
+			check = true;
+		}
+		else if (one_char == '>') {
+			check = false;
+			printf("%c", one_char);
+		}
+		else if (check) {
+			printf("%c", one_char);
+		}
+		else {
+			if (one_char == ' ' || one_char == '\n') {
+				show_stack(_stack_);
+				printf(" ");
+				while (!_stack_.empty()) _stack_.pop();
+			}
+			else {
+				_stack_.push(one_char);
+			}
+		}
+	}
+	return 0;
+}
