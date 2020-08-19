@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+/*
+malloc은 메모리공간의 할당만을 목적으로함
 
+즉 생성자를 자동호출하지않음
+
+new는 생성자를 자동호출함
+
+*/
 
 struct Node {
 	int data;
