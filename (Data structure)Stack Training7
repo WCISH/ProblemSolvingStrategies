@@ -1,0 +1,33 @@
+#include <string>
+#include <iostream>
+#include <stack>
+using namespace std;
+
+
+int main(void) {
+    
+    stack<int> _stack_;
+    string stick;
+    int total = 0;
+    getline(cin, stick);
+
+    for (int x = 0; x < stick.size(); x++) {
+        if (stick[x] == '(')
+            _stack_.push(x);
+        else if(stick[x]==')') {
+            if (x-_stack_.top()==1) {
+                _stack_.pop();
+                total += _stack_.size();
+            }
+            else {
+                if (!_stack_.empty()) {
+                    ++total;
+                    _stack_.pop();
+                }
+            }
+        }
+    }
+
+    printf("%d\n", total);
+    return 0;
+}
