@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-int _map[1000001]; // When I used map, time out happened, so I used array instead of map
+int _map[1000001]; // When I used map, time out was happened, so I used array instead of map
 
 int main(void) {
     int count;
