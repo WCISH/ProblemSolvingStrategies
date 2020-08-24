@@ -1,0 +1,44 @@
+#include <vector>
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int _map[1000001]; // When I used map, time out happened, so I used array instead of map
+
+int main(void) {
+    int count;
+
+    cin >> count;
+
+    vector<int> data_repo(count);
+    vector<int> answer(count);
+    stack<int> _stack;
+ 
+    for (int x = 0; x < count; x++) {
+        cin >> data_repo[x];
+        _map[data_repo[x]] += 1;
+    }
+    _stack.push(0);
+    for (int x = 0; x < count; x++) {
+        if (_stack.empty()) {
+            _stack.push(x);
+        }
+        while (!_stack.empty() && _map[data_repo[_stack.top()]] < _map[data_repo[x]]){
+            answer[_stack.top()] = data_repo[x];
+            _stack.pop();
+        }
+        _stack.push(x);
+    }
+    
+    while (!_stack.empty()) {
+        answer[_stack.top()] = -1;
+        _stack.pop();
+    }
+
+    for (int i = 0; i < count ; i++) {
+        printf("%d ", answer[i]);
+    }
+
+    return 0;
+}
+
