@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+
+int prime[1000000];
+int pn;
+bool check[1000001];
+
+int main(void) {
+	
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+
+	for (int x = 2; x < 1000000; x++) {
+		if (check[x] == false) {
+			prime[pn++] = x;
+
+			for (int y = x + x; y <= 1000000; y += x) {
+				check[y] = true;
+			}
+		}
+	}
+
+
+	do {
+		int input;
+		cin >> input;
+
+		if (input == 0)
+			break;
+
+		for (int x = 1; x < pn; x++) {
+			if (check[input - prime[x]] == false) {
+				cout << input << " = " << prime[x] << " + " << input-prime[x] << '\n';
+				break;
+			}
+		}
+	} while (true);
+
+	return 0;
+}
